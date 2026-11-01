@@ -8,8 +8,8 @@ module tb;
   wire [31:0] result;
   wire zero;
 
-  ALU dut1(.a(a),.b(b), .alu_ctrl(alu_ctrl), .result(result), .zero(zero));
-
+  // or ALU dut1(.a(a),.b(b), .alu_ctrl(alu_ctrl), .result(result), .zero(zero));
+  ALU dut1(.a,.b, .alu_ctrl, .result, .zero);
   initial begin 
 
 
@@ -17,74 +17,74 @@ module tb;
     $dumpfile("alu.vcd");
     $dumpvars(0,tb);
 
-    a= 32'd2;
-    b=32'd3;
-    alu_ctrl=3'd0;
+    a= 'd2;
+    b='d3;
+    alu_ctrl='d0;
     #10;
-    
-    if(result == 32'd5)
-      $display("pass");
-      else
-        $display("fail");
-        
-    
-    
 
-    a= 32'd1;
-    b=32'd3;
-    alu_ctrl=3'd1;
-     #10;
-    
-    if(result [1:0] == 2'b10)
+    if(result == 'd5)
       $display("pass");
-      else
-        $display("fail");
-        
-    
-    a= 32'd3;
-    b=32'd1;
-    alu_ctrl=3'd2;
-     #10;
-    
-    if(result[1:0] == 2'b01)
-      $display("pass");
-      else
-        $display("fail");
-        
-    
-    a= 32'd2;
-    b=32'd0;
-    alu_ctrl=3'd3;
-        #10;
-    
-    if(result[1:0] == 2'b10)
-      $display("pass");
-      else
-        $display("fail");
-    
-    
-    
-    a= 32'd2;
-    b=32'd3;
-    alu_ctrl=3'd4;
+    else
+      $display("fail");
+
+
+
+
+    a= 'd1;
+    b='d3;
+    alu_ctrl='d1;
     #10;
-    
-    if(result == 32'b1)
+
+    if(result [1:0] == 'b10)
       $display("pass");
-      else
-        $display("fail");
-        
-         a= 32'd5;
-    b=32'd3;
-    alu_ctrl=3'd4;
+    else
+      $display("fail");
+
+
+    a= 'd3;
+    b='d1;
+    alu_ctrl='d2;
     #10;
-    
-    if(result == 32'b0)
+
+    if(result[1:0] == 'b01)
       $display("pass");
-      else
-        $display("fail");
-    
-    
+    else
+      $display("fail");
+
+
+    a= 'd2;
+    b='d0;
+    alu_ctrl='d3;
+    #10;
+
+    if(result[1:0] == 'b10)
+      $display("pass");
+    else
+      $display("fail");
+
+
+
+    a= 'd2;
+    b='d3;
+    alu_ctrl='d4;
+    #10;
+
+    if(result == 'b1)
+      $display("pass");
+    else
+      $display("fail");
+
+    a= 'd5;
+    b='d3;
+    alu_ctrl='d4;
+    #10;
+
+    if(result == 'b0)
+      $display("pass");
+    else
+      $display("fail");
+
+
 
     #10 $finish;
 

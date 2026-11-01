@@ -1,39 +1,39 @@
 
 module ALU (
 
-  input[31:0] a,
-  input [31:0] b,
-  input  [2:0] alu_ctrl,
-  output reg [31:0] result,
-  output reg zero
+  input logic [31:0] a,
+  input logic [31:0] b,
+  input  logic [2:0] alu_ctrl,
+  output logic [31:0] result,
+  output logic zero
 
 );
-  
-  always @(*) begin
+
+  always_comb begin
 
     case(alu_ctrl)
 
-      3'b000: result = a+b;
-      3'b001: result = a-b;
-      3'b010: result = a&b;
-      3'b011: result = a|b;
-      3'b100:if($signed(a)<$signed(b)) begin
-         result = 32'b1;
+      'b000: result = a+b;
+      'b001: result = a-b;
+      'b010: result = a&b;
+      'b011: result = a|b;
+      'b100:if($signed(a)<$signed(b)) begin
+        result = 'b1;
       end
       else
         begin
-         result=32'b0;
+          result='b0;
         end
-      default:result = 32'b0;
+      default:result = 'b0;
 
 
-      endcase
-    
-    if(result == 32'b0)
-      zero = 1'b1;
+    endcase
+
+    if(result == 'b0)
+      zero = 'b1;
     else
-      zero = 1'b0;
-    end
+      zero = 'b0;
+  end
 
 
-      endmodule : ALU
+endmodule : ALU
